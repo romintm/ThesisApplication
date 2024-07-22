@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NewProposalDTO.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ThesisApplication</a> &gt; <a href="index.source.html" class="el_package">se2g12.thesisapplication.proposal</a> &gt; <span class="el_source">NewProposalDTO.kt</span></div><h1>NewProposalDTO.kt</h1><pre class="source lang-java linenums">package se2g12.thesisapplication.proposal
+
+import jakarta.persistence.Temporal
+import jakarta.persistence.TemporalType
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.Pattern
+import org.hibernate.validator.constraints.Length
+import java.time.LocalDate
+
+@Target(AnnotationTarget.FIELD, AnnotationTarget.PROPERTY)
+@Retention(AnnotationRetention.RUNTIME)
+@NotBlank
+@Length(min = 10, max = 10)
+@Pattern(regexp = &quot;\\d{4}-\\d{2}-\\d{2}&quot;, message = &quot;Invalid date format, must be YYYY-MM-DD&quot;)
+annotation class ValidDate
+
+<span class="pc" id="L17">data class NewProposalDTO (</span>
+<span class="fc" id="L18">    @NotBlank(message = &quot;A title must be provided&quot;)</span>
+<span class="pc" id="L19">    var title : String,</span>
+<span class="pc" id="L20">    var coSupervisors : List&lt;String&gt;? = listOf(),</span>
+<span class="pc" id="L21">    var keywords : List&lt;String&gt;,</span>
+<span class="pc" id="L22">    var type : List&lt;String&gt;,</span>
+<span class="pc" id="L23">    var groups : List&lt;String&gt;,</span>
+<span class="fc" id="L24">    @NotBlank(message = &quot;A description must be provided&quot;)</span>
+<span class="pc" id="L25">    var description : String,</span>
+<span class="pc" id="L26">    var requiredKnowledge : String?,</span>
+<span class="pc" id="L27">    var notes : String?,</span>
+<span class="fc" id="L28">    @ValidDate</span>
+    @Temporal(TemporalType.DATE)
+<span class="pc" id="L30">    var expiration : LocalDate,</span>
+<span class="pc" id="L31">    var level: String,</span>
+<span class="pc" id="L32">    var cds: List&lt;String&gt;</span>
+<span class="nc" id="L33">)</span>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

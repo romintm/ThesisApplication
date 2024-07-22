@@ -1,0 +1,39 @@
+{
+    "url": "http://localhost:8081/",
+    "baseThesisProposalApiURL": "http://localhost:8081/API/thesis/",
+    "getAllProposals": "proposals/all",
+    "getProposalsByCds": "proposals/cds",
+    "searchProposals": "proposals/search/",
+    "searchProposalsArchive":"proposals/searchArchive/",
+    "insertProposal": "proposals/",
+    "getaAllApplicationsForLoggedInStudent": "applications/student/",
+    "applyToProposal": "proposals/apply",
+    "updateProposal": "proposals/update/",
+    "acceptApplication": "applications", 
+    "browseAllApplyingStudents": "applications/students?proposalId=",
+    "browseAllApplications": "applications/by?proposalId=",
+    "getProposalByProfessorId": "proposals/getProfessorProposals/",
+
+    "setVirtualDate": "date/set/",
+    "getVirtualDate": "date/get/",
+
+    "getProposalByStudentId": "proposals/getProposalsBySId/",
+    "deleteProposalById": "proposals/delete/",
+    "copyProposalById": "proposals/copy/",
+    
+    "getDistinctSupervisors": "proposals/supervisors",
+    "getDistinctCoSupervisors": "proposals/coSupervisors",
+    "getDistinctTypes": "proposals/types",
+    "getDistinctLevels": "proposals/levels",
+    "getDistinctKeywords": "proposals/keywords",
+    "getDistinctGroups": "proposals/groups",
+    "getDistinctCds": "proposals/degrees",
+    "getThesisStatusByProposalId": "proposals/statusById/",
+
+    "getArchivedForLoggedProfessor": "/archive/getAllArchivedForLoggedInProf/",
+
+    "allRequests": "requests",
+    "archiveProposal": "archive/",
+    "addThesisRequest": "requests/"
+
+}

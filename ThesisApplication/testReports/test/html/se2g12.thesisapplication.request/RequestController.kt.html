@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequestController.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ThesisApplication</a> &gt; <a href="index.source.html" class="el_package">se2g12.thesisapplication.request</a> &gt; <span class="el_source">RequestController.kt</span></div><h1>RequestController.kt</h1><pre class="source lang-java linenums">package se2g12.thesisapplication.request
+
+import org.springframework.http.HttpStatus
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.web.bind.annotation.*
+
+<span class="fc" id="L7">@RestController</span>
+@CrossOrigin(origins = [&quot;http://localhost:5173&quot;])
+<span class="fc" id="L9">class RequestController(private val requestService: RequestService) {</span>
+
+    @GetMapping(&quot;/API/thesis/requests&quot;)
+    @PreAuthorize(&quot;hasRole('Secretary')&quot;)
+    fun getAllPendingRequests():List&lt;RequestDTO&gt;{
+<span class="fc" id="L14">        return requestService.getAllPendingRequestsForSecretary()</span>
+    }
+
+    @PatchMapping(&quot;/API/thesis/requests&quot;)
+    @PreAuthorize(&quot;hasRole('Secretary')&quot;)
+    fun setSecretaryStatus(@RequestBody request: RequestStatusDTO){
+<span class="fc" id="L20">        requestService.setRequestSecretaryStatus(request.requestId, request.status)</span>
+<span class="fc" id="L21">    }</span>
+    @GetMapping(&quot;/API/thesis/requests/{professorId}&quot;)
+    @PreAuthorize(&quot;hasRole('Professor')&quot;)
+    fun getAllPendingRequestsByProfessor(@PathVariable professorId:String):List&lt;RequestDTO&gt;{
+<span class="fc" id="L25">        return requestService.getAllPendingRequestsForProfessor(professorId)</span>
+    }
+
+    @PatchMapping(&quot;/API/thesis/requests/{professorId}&quot;)
+    @PreAuthorize(&quot;hasRole('Professor')&quot;)
+    fun setProfessorStatus(@PathVariable professorId:String, @RequestBody request: RequestStatusDTO){
+<span class="fc" id="L31">        requestService.setRequestSupervisorStatus(request.requestId, request.status, professorId)</span>
+<span class="fc" id="L32">    }</span>
+    @PostMapping(&quot;/API/thesis/requests/{studentId}&quot;)
+    @PreAuthorize(&quot;hasRole('Student')&quot;)
+    @ResponseStatus(HttpStatus.CREATED)
+    fun addNewRequest(@RequestBody obj: NewRequestDTO, @PathVariable studentId:String){
+<span class="fc" id="L37">        println(obj)</span>
+<span class="fc" id="L38">        requestService.addNewRequest(obj, studentId)</span>
+
+<span class="fc" id="L40">    }</span>
+    @PostMapping(&quot;/API/thesis/requests/{professorId}/change&quot;)
+    @PreAuthorize(&quot;hasRole('Professor')&quot;)
+    fun setRequestChange(@PathVariable professorId:String, @RequestBody info: ChangeInfoDTO){
+<span class="fc" id="L44">        requestService.addRequestChangeInfo(info, professorId)</span>
+<span class="fc" id="L45">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
